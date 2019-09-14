@@ -10,7 +10,10 @@ class Comments < ActiveSupport::TestCase
       assert_no_text new_comment.title
 
       # Save & fire off the ActionCable job
-
+      PartialsChannel.broadcast_to('comments/_list', {
+        body: ApplicationController.render('comments/_list', locals: { comments: Comment.all })
+      })
+      
       # Wait for the new contents to be added to the page
       Timeout.timeout(Capybara.default_max_wait_time) do
         loop until page.has_content?(new_comment.title)

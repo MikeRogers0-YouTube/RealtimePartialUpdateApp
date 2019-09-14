@@ -20,10 +20,16 @@ export default class extends Controller {
 
     this.subscription = consumer.subscriptions.create(
       {
-        channel: "PartialChannel",
+        channel: "PartialsChannel",
         partial: this.data.get("partial")
       },
       {
+        connected() {
+          // Called when the subscription is ready for use on the server
+        },
+        disconnected() {
+          // Called when the subscription has been terminated by the server
+        },
         received(data) {
           realtimeController.renderPartial(data);
         }
@@ -48,8 +54,9 @@ export default class extends Controller {
     });
 
     // I don't think this is the best approach, I'll lint it in CI.
-    this.element.innerHTML = '';
-    this.element.appendChild(body );
+    //this.element.innerHTML = '';
+    while( this.element.firstChild ) { this.element.removeChild( this.element.firstChild ); }
+    this.element.appendChild(body);
   }
-  
+
 }
