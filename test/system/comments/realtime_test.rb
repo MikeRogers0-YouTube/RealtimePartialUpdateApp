@@ -6,13 +6,12 @@ class Comments < ActiveSupport::TestCase
       visit comments_url
 
       new_comment = Comment.new(title: 'Realtime title', body: 'Realtime Body')
+      new_comment.save!
 
       assert_no_text new_comment.title
 
       # Save & fire off the ActionCable job
-      PartialsChannel.broadcast_to('comments/_list', {
-        body: ApplicationController.render('comments/_list', locals: { comments: Comment.all })
-      })
+      ::Comments::PartialsUpdateJob.perform_now(new_comment)
       
       # Wait for the new contents to be added to the page
       Timeout.timeout(Capybara.default_max_wait_time) do
