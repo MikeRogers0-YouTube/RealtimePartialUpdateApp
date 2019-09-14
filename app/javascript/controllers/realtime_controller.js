@@ -56,7 +56,10 @@ export default class extends Controller {
     // I don't think this is the best approach, I'll lint it in CI.
     //this.element.innerHTML = '';
     while( this.element.firstChild ) { this.element.removeChild( this.element.firstChild ); }
-    this.element.appendChild(body);
+
+    for (var i = 0; i < body.body.childNodes.length; i++) {
+      this.element.appendChild(body.body.childNodes[i]);
+    }
   }
 
 }
