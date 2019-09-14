@@ -24,6 +24,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
 
     if @comment.save
+      Partials::Comments::ListJob.perform_later
       redirect_to @comment, notice: 'Comment was successfully created.'
     else
       render :new
@@ -42,6 +43,7 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   def destroy
     @comment.destroy
+    Partials::Comments::ListJob.perform_later
     redirect_to comments_url, notice: 'Comment was successfully destroyed.'
   end
 

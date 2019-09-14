@@ -11,7 +11,7 @@ class Comments < ActiveSupport::TestCase
       assert_no_text new_comment.title
 
       # Save & fire off the ActionCable job
-      ::Comments::PartialsUpdateJob.perform_now(new_comment)
+      ::Partials::Comments::ListJob.perform_now
       
       # Wait for the new contents to be added to the page
       Timeout.timeout(Capybara.default_max_wait_time) do
