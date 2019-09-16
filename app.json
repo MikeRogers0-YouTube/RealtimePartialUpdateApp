@@ -1,0 +1,50 @@
+{
+  "name": "Realtime Partial Update App",
+  "description": "A sample of how to use ActionCable & Stimulus to update partials",
+  "repository": "https://github.com/MikeRogers0/RealtimePartialUpdateApp",
+  "keywords": ["Rails", "Stimulus", "ActionCable"],
+  "env": {
+    "LANG": {
+      "required": true
+    },
+    "RACK_ENV": {
+      "required": true
+    },
+    "RAILS_ENV": {
+      "required": true
+    },
+    "RAILS_LOG_TO_STDOUT": {
+      "required": true
+    },
+    "RAILS_SERVE_STATIC_FILES": {
+      "required": true
+    },
+    "RAILS_MASTER_KEY": {
+      "required": true,
+      "value": "f5f7d683be622e517d5840ee9836c4f2"
+    },
+    "DURING_RELEASE_RUN_MIGRATIONS": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    },
+    "worker": {
+      "quantity": 0
+    }
+  },
+  "addons": [
+    "heroku-postgresql",
+    "heroku-redis"
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-activestorage-preview"
+    },
+    {
+      "url": "heroku/ruby"
+    }
+  ]
+}
