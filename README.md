@@ -12,7 +12,7 @@ This is a sample of how to use ActionCable & Stimulus to update partials in Rail
 - [app/jobs/partials/comments/list_job.rb](https://github.com/MikeRogers0/RealtimePartialUpdateApp/blob/master/app/jobs/partials/comments/list_job.rb) - The ActiveJob where I broadcast the updated partial via ActionCable.
 - [test/system/comments/realtime_partials_test.rb](https://github.com/MikeRogers0/RealtimePartialUpdateApp/blob/master/test/system/comments/realtime_partials_test.rb) - The system test for the realtime partials.
 
-## Setting up locally
+## Setting up locally
 
 Pull down the repo & run:
 
