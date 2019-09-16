@@ -11,9 +11,9 @@ gem 'sqlite3', '~> 1.4', group: %i[development test]
 gem 'pg', '>= 0.18', '< 2.0', group: :production # Use postgres in production on Heroku
 
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 4.0'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5'
+gem 'sassc-rails', '~> 2.1'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 4.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
