@@ -3,8 +3,8 @@
 // 
 // This realtime controller will update partials as requested.
 //
-// <div data-controller="realtime">
-//   <h1 data-target="hello.output"></h1>
+// <div data-controller="realtime" data-realtime-partial="A friendly name for your partial">
+//   <p>Any HTML here</p>
 // </div>
 
 import { Controller } from "stimulus"
@@ -57,8 +57,14 @@ export default class extends Controller {
     // Remove all the current nodes from our element.
     while( this.element.firstChild ) { this.element.removeChild( this.element.firstChild ); }
 
-    // Append the new nodes.
-    while( newBody.firstChild ) { this.element.appendChild( newBody.firstChild ); }
+    // When we're sending a new partial, which is a full replacement of our
+    // element & not just a group of children.
+    if( newBody.childElementCount === 1 && newBody.firstElementChild.dataset.realtimePartial === this.data.get("partial") ){
+      while( newBody.firstElementChild.firstChild ) { this.element.appendChild( newBody.firstElementChild.firstChild ); }
+    } else {
+      // Append the new nodes.
+      while( newBody.firstChild ) { this.element.appendChild( newBody.firstChild ); }
+    }
   }
 
   // From: https://stackoverflow.com/a/42658543/445724
@@ -69,6 +75,7 @@ export default class extends Controller {
   _parseHTMLResponse(responseHTML){
     let parser = new DOMParser();
     let responseDocument = parser.parseFromString( `<template>${responseHTML}</template>` , 'text/html');
-    return responseDocument.head.firstElementChild.content;
+    let parsedHTML = responseDocument.head.firstElementChild.content;
+    return parsedHTML;
   }
 }
