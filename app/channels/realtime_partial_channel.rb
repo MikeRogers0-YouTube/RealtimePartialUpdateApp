@@ -1,6 +1,6 @@
-class PartialsChannel < ApplicationCable::Channel
+class RealtimePartialChannel < ApplicationCable::Channel
   def subscribed
-    stream_for params[:partial]
+    stream_for params[:key]
   end
 
   def unsubscribed

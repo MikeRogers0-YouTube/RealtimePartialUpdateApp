@@ -1,9 +1,9 @@
 // Visit The Stimulus Handbook for more details 
 // https://stimulusjs.org/handbook/introduction
 // 
-// This realtime controller will update partials as requested.
+// This realtime-partial controller will update partials via ActionCable.
 //
-// <div data-controller="realtime" data-realtime-partial="A friendly name for your partial">
+// <div data-controller="realtime-partial" data-realtime-partial-key="A friendly name for your partial">
 //   <p>Any HTML here</p>
 // </div>
 
@@ -16,12 +16,12 @@ export default class extends Controller {
   }
 
   connect() {
-    let realtimeController = this;
+    let realtimePartialController = this;
 
     this.subscription = consumer.subscriptions.create(
       {
-        channel: "PartialsChannel",
-        partial: this.data.get("partial")
+        channel: "RealtimePartialChannel",
+        key: this.data.get("key")
       },
       {
         connected() {
@@ -31,7 +31,7 @@ export default class extends Controller {
           // Called when the subscription has been terminated by the server
         },
         received(data) {
-          realtimeController.renderPartial(data);
+          realtimePartialController.renderPartial(data);
         }
       }
     );
@@ -42,7 +42,6 @@ export default class extends Controller {
   }
 
   renderPartial(data) {
-    let realtimeController = this;
     let newBody = this._parseHTMLResponse(data['body']);
 
     // Replace all data-turbolinks-permanent elements in the body with what was there
@@ -59,7 +58,7 @@ export default class extends Controller {
 
     // When we're sending a new partial, which is a full replacement of our
     // element & not just a group of children.
-    if( newBody.childElementCount === 1 && newBody.firstElementChild.dataset.realtimePartial === this.data.get("partial") ){
+    if( newBody.childElementCount === 1 && newBody.firstElementChild.dataset.realtimePartialKey === this.data.get("key") ){
       while( newBody.firstElementChild.firstChild ) { this.element.appendChild( newBody.firstElementChild.firstChild ); }
     } else {
       // Append the new nodes.

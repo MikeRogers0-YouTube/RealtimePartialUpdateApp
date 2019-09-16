@@ -6,6 +6,9 @@ This is a sample of how to use ActionCable & Stimulus to update partials in Rail
 
 ## Key files
 
+- [config/cable.yml](https://github.com/MikeRogers0/RealtimePartialUpdateApp/blob/9b3fdb8aef2e0d645f10fe3b74ec5a245182b00a/config/cable.yml#L1-L4) - I setup the local adaptor to be `redis` so ActionCable will work locally.
+- [controllers/realtime_controller.js](https://github.com/MikeRogers0/RealtimePartialUpdateApp/blob/master/app/javascript/controllers/realtime_controller.js) - 
+
 TODO: List files that are actually worth looking at.
 
 ## Setting up locally
