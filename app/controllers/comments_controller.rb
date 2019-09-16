@@ -34,6 +34,7 @@ class CommentsController < ApplicationController
   # PATCH/PUT /comments/1
   def update
     if @comment.update(comment_params)
+      Partials::SingleObjectJob.perform_later(@comment)
       redirect_to @comment, notice: 'Comment was successfully updated.'
     else
       render :edit
