@@ -5,26 +5,32 @@
   "keywords": ["Rails", "Stimulus", "ActionCable"],
   "env": {
     "LANG": {
-      "required": true
+      "required": true,
+      "value": "en_US.UTF-8"
     },
     "RACK_ENV": {
-      "required": true
+      "required": true,
+      "value": "production"
     },
     "RAILS_ENV": {
-      "required": true
+      "required": true,
+      "value": "production"
     },
     "RAILS_LOG_TO_STDOUT": {
-      "required": true
+      "required": true,
+      "value": "enabled"
     },
     "RAILS_SERVE_STATIC_FILES": {
-      "required": true
+      "required": true,
+      "value": "enabled"
     },
     "RAILS_MASTER_KEY": {
       "required": true,
       "value": "f5f7d683be622e517d5840ee9836c4f2"
     },
     "DURING_RELEASE_RUN_MIGRATIONS": {
-      "required": true
+      "required": true,
+      "value": "enabled"
     }
   },
   "formation": {
