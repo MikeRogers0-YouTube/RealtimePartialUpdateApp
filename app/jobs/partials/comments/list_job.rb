@@ -3,7 +3,7 @@ class Partials::Comments::ListJob < ApplicationJob
 
   def perform
     PartialsChannel.broadcast_to('comments/_list', {
-      body: ApplicationController.render('comments/_list', layout: false, locals: { comments: Comment.all })
+      body: ApplicationController.render(Comment.all, layout: false)
     })
   end
 end
